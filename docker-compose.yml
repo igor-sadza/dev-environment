@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  dev-environment:
+    image: ghcr.io/igor-sadza/dev-environment:latest
+    ports: 
+      - "${DEV_PORT}:22"
+    volumes:
+      - /run/docker.sock:/var/run/docker.sock
+    command: /bin/bash -c "echo \"root:${ROOT_PASSWORD}\" | chpasswd && /usr/sbin/sshd -D"
+      
+networks:
+  infrastructure:
+    name: dev-environment
+        
